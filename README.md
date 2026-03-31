@@ -29,9 +29,13 @@ python bot.py
 | Command | Description |
 |---------|-------------|
 | `/purge limit:50` | Delete the last 50 messages |
+| `/purge limit:200` | Delete 200 messages (batched automatically) |
 | `/purge limit:10 user:@someone` | Delete the last 10 messages from a specific user |
+| `/purge limit:100 channel:#general` | Delete 100 messages in a specific channel |
 
-- `limit`: Number of messages to delete (1-100)
+- `limit`: Number of messages to delete (1-500, batched in groups of 100)
 - `user`: Optional filter — only delete messages from this user
+- `channel`: Optional target channel (defaults to current channel)
 
 The command is only visible to users with **Manage Messages** permission.
+The bot needs **Manage Messages** and **Read Message History** permissions in the target channel.
