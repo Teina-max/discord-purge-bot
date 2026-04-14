@@ -2,6 +2,16 @@
 
 Py-cord Discord bot with `/purge` command for bulk message deletion.
 
+**Requires Python 3.10+**
+
+## How it works
+
+- Registers a `/purge` slash command visible only to users with **Manage Messages** permission
+- Deletes messages in batches of 100 with a 1-second delay between batches to respect Discord rate limits
+- Checks both bot and user permissions before acting — if the command targets another channel, the user must have Manage Messages there too
+- All responses are ephemeral (only visible to the command author)
+- Supports optional filters: target a specific user or channel
+
 ## Setup
 
 ### 1. Create a Discord Bot

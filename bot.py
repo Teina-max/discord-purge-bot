@@ -65,6 +65,7 @@ async def purge(
     check = (lambda m: m.author == user) if user else None
     total_deleted = 0
     remaining = limit
+    empty_rounds = 0
 
     try:
         while remaining > 0:
@@ -74,15 +75,20 @@ async def purge(
                 check=check,
                 reason=f"Purge by {ctx.author}",
             )
-            total_deleted += len(deleted)
+            count = len(deleted)
+            total_deleted += count
 
             if check:
-                remaining -= len(deleted)
-                if len(deleted) == 0:
-                    break
+                remaining -= count
+                if count == 0:
+                    empty_rounds += 1
+                    if empty_rounds >= 2:
+                        break
+                else:
+                    empty_rounds = 0
             else:
                 remaining -= batch
-                if len(deleted) < batch:
+                if count < batch:
                     break
 
             if remaining > 0:
