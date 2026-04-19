@@ -1,0 +1,17 @@
+version: 2
+updates:
+  # Python bot dependencies
+  - package-ecosystem: "pip"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "08:00"
+      timezone: "Europe/Paris"
+    open-pull-requests-limit: 3
+    labels:
+      - "dependencies"
+    # Skip major bumps — they need manual review, keep noise low
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
